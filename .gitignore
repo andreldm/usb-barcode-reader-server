@@ -1,0 +1,7 @@
+.settings/
+adb/
+lib/
+target/
+.classpath
+.project
+*.log
