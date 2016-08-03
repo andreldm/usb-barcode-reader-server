@@ -10,12 +10,11 @@ import java.util.List;
 import com.andreldm.usb_barcode_reader.server.Constants;
 
 public class ADBUtils {
-
     private static final String ADB_PATH = String.format("%s%sadb%s",
             Paths.get(".").toAbsolutePath().normalize().toString(), File.separator, File.separator);
-    private static final String CMD_DEVICES = "adb devices";
-    private static final String CMD_REVERSE = String.format("adb reverse tcp:%s tcp:%s", Constants.PORT,
-            Constants.PORT);
+    private static final String CMD_DEVICES = String.format("%s devices", getExecutable());
+    private static final String CMD_REVERSE = String.format("%s reverse tcp:%s tcp:%s",
+            getExecutable(), Constants.PORT, Constants.PORT);
 
     public static String getDevice() {
         List<String> lines = executeCommand(CMD_DEVICES);
@@ -62,5 +61,11 @@ public class ADBUtils {
         }
 
         return null;
+    }
+    
+    private static String getExecutable() {
+        return Util.isLinux() ? "adb" :
+            Util.isWindows() ? "adb.exe" : "";
+            
     }
 }

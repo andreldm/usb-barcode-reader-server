@@ -19,4 +19,12 @@ public class Util {
 
         return Constants.OS_UNKNOWN;
     }
+
+    public static boolean isLinux() {
+        return Constants.OS_LINUX == whichOS();
+    }
+
+    public static boolean isWindows() {
+        return Constants.OS_WINDOWS == whichOS();
+    }
 }
